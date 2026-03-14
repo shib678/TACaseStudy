@@ -1,0 +1,78 @@
+version: "3.9"
+
+services:
+  # ── SQL Server ─────────────────────────────────────────────────────────────
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: retail-pricing-sqlserver
+    environment:
+      SA_PASSWORD: "Dev@Password123"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Dev@Password123 -Q 'SELECT 1'"]
+      interval: 10s
+      retries: 10
+      start_period: 30s
+
+  # ── Redis Cache ─────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: retail-pricing-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+  # ── Backend API ─────────────────────────────────────────────────────────────
+  api:
+    build:
+      context: ./backend/RetailPricing
+      dockerfile: Dockerfile
+    container_name: retail-pricing-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=RetailPricingDb;User Id=sa;Password=Dev@Password123;TrustServerCertificate=True
+      - Cors__AllowedOrigins__0=http://localhost:3000
+      - Cors__AllowedOrigins__1=http://localhost:3001
+      - Cors__AllowedOrigins__2=http://localhost:3002
+    ports:
+      - "5000:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+  # ── Shell App ────────────────────────────────────────────────────────────────
+  shell:
+    build:
+      context: ./frontend/shell
+      dockerfile: Dockerfile
+    container_name: retail-pricing-shell
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+  # ── MFE Upload ──────────────────────────────────────────────────────────────
+  mfe-upload:
+    build:
+      context: ./frontend/mfe-upload
+      dockerfile: Dockerfile
+    container_name: retail-pricing-mfe-upload
+    ports:
+      - "3001:80"
+
+  # ── MFE Search ──────────────────────────────────────────────────────────────
+  mfe-search:
+    build:
+      context: ./frontend/mfe-search
+      dockerfile: Dockerfile
+    container_name: retail-pricing-mfe-search
+    ports:
+      - "3002:80"
+
+volumes:
+  sqldata:

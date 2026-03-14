@@ -1,0 +1,193 @@
+# =============================================================
+#  Retail Pricing Feed — .gitignore
+#  Covers: .NET 8, Node/React, Docker, IDEs, OS artefacts
+# =============================================================
+
+# ── Operating System ─────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── .NET / C# ─────────────────────────────────────────────────
+## Build output
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio artefacts
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.vspscc
+*.vssscc
+
+## Rider / JetBrains
+.idea/
+*.sln.iml
+
+## Publish / deploy output
+[Pp]ublish/
+publish/
+PublishProfiles/
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Entity Framework migrations temp files
+*.mdf
+*.ldf
+*.ndf
+
+## Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+coverage/
+*.coverage
+*.coveragexml
+coverage.cobertura.xml
+lcov.info
+
+## Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## dotCover
+*.dotCover
+
+## dotMemory
+*.dmw
+
+## dotTrace
+*.dtp
+
+## BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# ── Node.js / React / Microfrontends ─────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+## Build output
+dist/
+dist-ssr/
+build/
+.next/
+out/
+
+## Parcel
+.cache/
+.parcel-cache/
+
+## Webpack Module Federation remote manifests (runtime-generated)
+remoteEntry.js
+
+## Vite
+vite.config.ts.timestamp-*
+
+## TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+## Environment / secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+## Package manager locks (keep package-lock.json or yarn.lock but not both)
+# Uncomment the one you DON'T use:
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+## Coverage
+coverage/
+lcov.info
+.nyc_output/
+
+# ── Docker ────────────────────────────────────────────────────
+## Ignore locally-generated compose overrides and bind-mount data
+docker-compose.override.yml
+.docker/
+docker-data/
+
+# ── Secrets & Configuration ───────────────────────────────────
+## Never commit real connection strings or keys
+appsettings.Production.json
+appsettings.Staging.json
+secrets.json
+*.pfx
+*.p12
+*.key
+*.pem
+*.cer
+*.crt
+
+## Azure / AWS credential files
+.azure/
+.aws/
+local.settings.json
+
+# ── Logs ─────────────────────────────────────────────────────
+*.log
+*.log.*
+logs/
+log/
+
+# ── Editors ───────────────────────────────────────────────────
+## VS Code (keep shared workspace settings, ignore personal ones)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+## Vim / Emacs
+*~
+*.swp
+*.swo
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+Session.vim
+.netrwhist
+tags
+
+# ── Temporary & misc ─────────────────────────────────────────
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.patch
+*.diff
+*.cache
+*.pid
+*.seed
+*.pid.lock
+
+# ── Claude ───────────────────────────────────────────────────
+.claude/settings.local.json

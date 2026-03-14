@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>RetailPricing.Application.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Projects under test -->
+    <ProjectReference Include="..\..\src\RetailPricing.Application\RetailPricing.Application.csproj" />
+    <ProjectReference Include="..\..\src\RetailPricing.Domain\RetailPricing.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Test framework -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk"           Version="17.12.0" />
+    <PackageReference Include="xunit"                            Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio"        Version="2.8.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector"               Version="6.0.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+
+    <!-- Mocking & assertions -->
+    <PackageReference Include="NSubstitute"                      Version="5.3.0" />
+    <PackageReference Include="FluentAssertions"                 Version="6.12.2" />
+
+    <!-- Logger mock helper -->
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Copy CSV test data files to the build output directory -->
+    <None Update="TestData\*.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

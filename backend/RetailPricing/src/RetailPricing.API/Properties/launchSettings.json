@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "RetailPricing.API": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56909;http://localhost:56910"
+    }
+  }
+}
